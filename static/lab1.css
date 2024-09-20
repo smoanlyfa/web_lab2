@@ -1,10 +1,18 @@
-img{
-    width: 300;
-    height: 300;
-    text-align: center;
-}
 
 h1{
     text-align: center;
-    color: brown;
+    color: blueviolet;
+}
+
+header {
+    text-align: center;
+    font-size: 18pt;
+    color: black;
+    background-color: yellow;
+}
+footer{
+    font-style: italic;
+    text-align: right;
+    background-color: yellow;
+    font-size: 10pt;
 }
