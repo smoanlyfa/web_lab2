@@ -168,4 +168,4 @@ def example():
     nlab = '2'
     group = 'ФБИ-23'
     course = '3'
-    return render_template('example.html', name=name, nlab=nlab, group=group, course=course)
+    return render_template('example.html', nlab=nlab, group=group)
