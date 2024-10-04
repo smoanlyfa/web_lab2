@@ -28,3 +28,17 @@ footer {
     left: 0;
     right: 0;
 }
+
+img {
+    text-align: center;
+    width: 300px;
+    height: auto;
+}
+h1 {
+    text-align: center;
+}
+
+p {
+    font-size: 16pt;
+    text-align: justify;
+}
