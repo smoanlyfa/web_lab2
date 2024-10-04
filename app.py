@@ -188,3 +188,7 @@ def example():
         {'author':'Рэй Брэдбери', 'name': 'Вино из одуванчиков', 'hanr': 'Фантастика', 'col': '139 с.'},
     ]
     return render_template('example.html', nlab=nlab, group=group, fruits=fruits, books=books)
+
+@app.route('/lab2/')
+def lab2():
+    return render_template('lab2.html')
