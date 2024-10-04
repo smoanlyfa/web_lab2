@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template
 app = Flask(__name__)
 
 @app.route("/")
@@ -162,3 +162,9 @@ def mango():
 </html>
 '''
 
+@app.route('/lab2/example')
+def example():
+    name = 'Софья Опарина'
+    nlab = '2'
+    group = 'ФБИ-23'
+    return render_template('example.html', name=name, nlab=nlab, group=group)
