@@ -167,4 +167,5 @@ def example():
     name = 'Софья Опарина'
     nlab = '2'
     group = 'ФБИ-23'
-    return render_template('example.html', name=name, nlab=nlab, group=group)
+    course = '3'
+    return render_template('example.html', name=name, nlab=nlab, group=group, course=course)
