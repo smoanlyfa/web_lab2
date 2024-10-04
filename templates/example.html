@@ -19,6 +19,13 @@
             <li>{{f.name}}: {{f.price}} &#8381;</li>
             {% endfor %}
         </ul>
+
+        <ul>
+            {% for b in books %}
+            <li>{{b.author}}: {{b.name}} - {{b.hanr}} {{b.col}} </li>
+            {% endfor %}
+        </ul>
+    
     </main>
 
     <footer>

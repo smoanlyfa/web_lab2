@@ -175,4 +175,16 @@ def example():
         {'name':'апельсины', 'price': 160},
         {'name':'персики', 'price': 230},
     ]
-    return render_template('example.html', nlab=nlab, group=group, fruits=fruits)
+    books = [
+        {'author':'Рэй Брэдбери', 'name': '451° по Фаренгейту', 'hanr': 'Проза', 'col': '450 с.'},
+        {'author':'Джордж Оруэлл', 'name': '1984', 'hanr': 'Фантастика', 'col': '323с.'},
+        {'author':'Михаил Булгаков', 'name': 'Мастер и Маргарита', 'hanr': 'Ужасы', 'col': '364 с.'},
+        {'author':'Грегори Дэвид Робертс', 'name': 'Шантарам', 'hanr': 'Приключения', 'col': '294 с.'},
+        {'author':'Эрих Мария Ремарк', 'name': 'Три товарища', 'hanr': 'Проза', 'col': '174 с.'},
+        {'author':'Дэниел Киз', 'name': 'Цветы для Элджернона', 'hanr': 'Фантастика', 'col': '153 с.'},
+        {'author':'Оскар Уайльд', 'name': 'Портрет Дориана Грея', 'hanr': 'Фантастика', 'col': '122 с.'},
+        {'author':'Антуан де Сент-Экзюпери', 'name': 'Маленький принц', 'hanr': 'Проза', 'col': '129 с.'},
+        {'author':'Джером Д. Сэлинджер', 'name': 'Над пропастью во ржи', 'hanr': 'Проза', 'col': '107 с.'},
+        {'author':'Рэй Брэдбери', 'name': 'Вино из одуванчиков', 'hanr': 'Фантастика', 'col': '139 с.'},
+    ]
+    return render_template('example.html', nlab=nlab, group=group, fruits=fruits, books=books)
