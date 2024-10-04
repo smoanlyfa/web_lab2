@@ -168,4 +168,11 @@ def example():
     nlab = '2'
     group = 'ФБИ-23'
     course = '3'
-    return render_template('example.html', nlab=nlab, group=group)
+    fruits = [
+        {'name':'бананы', 'price': 130},
+        {'name':'яблоки', 'price': 80},
+        {'name':'мандарины', 'price': 150},
+        {'name':'апельсины', 'price': 160},
+        {'name':'персики', 'price': 230},
+    ]
+    return render_template('example.html', nlab=nlab, group=group, fruits=fruits)
