@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: rgba(46, 133, 46, 0.47);
+    background-color: rgb(255, 255, 255);
 }
 
 main {
@@ -11,7 +11,7 @@ main {
 header{
     margin-bottom: 30px;
     padding: 20px;
-    background: rgba(226, 208, 43, 0.581);
+    background: rgba(162, 236, 158, 0.581);
     text-align: center;
     font-size: 18pt;
     font-weight: 100;
@@ -21,7 +21,7 @@ header{
 footer {
     margin-top: 20px;
     padding: 10px;
-    background: rgba(226, 208, 43, 0.581);
+    background: rgba(162, 236, 158, 0.581);
     text-align: right;
     position: fixed;
     bottom: 0;
@@ -40,5 +40,10 @@ h1 {
 
 p {
     font-size: 16pt;
+    text-align: justify;
+}
+
+div {
+    font-size: 14pt;
     text-align: justify;
 }
