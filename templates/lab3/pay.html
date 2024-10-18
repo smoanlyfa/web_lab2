@@ -1,0 +1,87 @@
+{%extends "base.html"%}
+
+{% block lab2 %} Лабораторная работа 3 {% endblock %}
+
+{%block main%}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 20px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+        color: #333;
+        text-align: center;
+    }
+    .sum {
+        color: #333;
+        text-align: center;
+    }
+
+    form {
+        max-width: 300px;
+        margin: auto;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    div {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    button {
+        background-color: rgba(162, 236, 158, 0.581);; 
+        color: rgb(0, 0, 0); 
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: rgba(162, 236, 158, 0.581);; 
+    }
+</style>
+   <h1>
+        Оплата
+   </h1>
+
+   <div class="sum">
+        Сумма к оплате: {{price}}
+   </div>
+
+   <form action="/lab3/success">
+        <div>Номер банковской карты:</div>
+        <label>
+            <input type="text"  name="card" pattern="\d{16}">
+        </label>
+
+        <div>Имя держателя карты:</div>
+        <label>
+            <input type="text"  name="name">
+        </label>
+
+        <div>CVV:</div>
+        <label>
+            <input type="text"  name="CVV" size="3" pattern="\d{3}">
+        </label>
+        
+        <div>
+            <button type="submit">Оплатить</button>
+            <a href="/lab3/order">Отказаться</a>
+        </div>
+   </form>
+{%endblock%}
