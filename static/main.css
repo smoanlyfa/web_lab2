@@ -47,3 +47,7 @@ div {
     font-size: 14pt;
     text-align: justify;
 }
+
+.error {
+    color: red;
+}
