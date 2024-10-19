@@ -32,7 +32,7 @@ def lab_1():
         <footer>
             &copy; Опарина Софья, ФБИ-23, 3 курс, 2024
         </footer>
-        <link rel='stylesheet' href ="'''+url_for('static', filename = 'lab1.css')+'''">
+        <link rel='stylesheet' href ="'''+url_for('static', filename = 'lab1/lab1.css')+'''">
     </body>
 </html>
 '''
@@ -46,7 +46,7 @@ def oak():
     <body>
         <h1>Дуб</h1>
         <img src="'''+url_for('static', filename = 'oak.jpg')+'''">
-        <link rel='stylesheet' href ="'''+url_for('static', filename = 'lab1.css')+'''">
+        <link rel='stylesheet' href ="'''+url_for('static', filename = 'lab1/lab1.css')+'''">
     </body>
 </html>
 '''
@@ -68,7 +68,7 @@ def student():
         Опарина Софья Александровна
         </h1>
         <img src="'''+url_for('static', filename = 'logo.png')+'''" width = "300" height ="300">
-        <link rel='stylesheet' href ="'''+url_for('static', filename = 'lab1.css')+'''">
+        <link rel='stylesheet' href ="'''+url_for('static', filename = 'lab1/lab1.css')+'''">
     </body>
 </html>
 '''
@@ -102,7 +102,7 @@ def python():
             </p>
         </h2>
         <img src="'''+url_for('static', filename = 'python.png')+'''" left = "50%" width = "300" height ="300" >
-        <link rel='stylesheet' href ="'''+url_for('static', filename = 'lab1.css')+'''">
+        <link rel='stylesheet' href ="'''+url_for('static', filename = 'lab1/lab1.css')+'''">
     </body>
 </html>
 '''
@@ -133,7 +133,7 @@ def mango():
             </p>
         </h2>
         <img src="'''+url_for('static', filename = 'mango.jfif')+'''"width = "300" height ="300">
-        <link rel='stylesheet' href ="'''+url_for('static', filename = 'lab1.css')+'''">
+        <link rel='stylesheet' href ="'''+url_for('static', filename = 'lab1/lab1.css')+'''">
     </body>
 </html>
 '''
