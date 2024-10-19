@@ -28,7 +28,7 @@ def form1():
     if age == '':
         errors['age'] = 'Заполните поле!'
     sex = request.args.get('sex')
-    return render_template('lab3/form1.html', user = user, age = age, sex = sex, errors=errors)
+    return render_template('lab3/args.get1.html', user = user, age = age, sex = sex, errors=errors)
 
 @lab3.route('/lab3/order')
 def order():
@@ -99,3 +99,44 @@ def settings():
     style = request.cookies.get('style')
     resp = make_response(render_template('lab3/settings.html', style=style))
     return resp
+
+@lab3.route('/lab3/tutu')
+def tutu():
+    return render_template("/lab3/tutu.html")
+
+@lab3.route('/lab3/ticket')
+def ticket():
+    fio = request.args.get["fio"]
+    sleeper = request.args.get["sleeper"]
+    bedding = "yes" if "bedding" in request.args.get else "no"
+    luggage = "yes" if "luggage" in request.args.get else "no"
+    age = int(request.args.get["age"])
+    departure = request.args.get["departure"]
+    destination = request.args.get["destination"]
+    date = request.args.get["date"]
+    insurance = "yes" if "insurance" in request.args.get else "no"
+
+    # Определение стоимости
+    price = 1000 if age >= 18 else 700  # Взрослый или детский билет
+    if sleeper in ["нижняя", "нижняя боковая"]:
+        price += 100
+    if bedding == "yes":
+        price += 75
+    if luggage == "yes":
+        price += 250
+    if insurance == "yes":
+        price += 150
+
+    ticket_type = "Детский билет" if age < 18 else "Взрослый билет"
+
+    return render_template('lab3/ticket.html', fio=fio, sleeper=sleeper,
+                           bedding=bedding, luggage=luggage, age=age,
+                           departure=departure, destination=destination,
+                           date=date, insurance=insurance, price=price,
+                           ticket_type=ticket_type)
+
+if __name__ == "__main__":
+    lab3.run(debug=True)
+
+
+
