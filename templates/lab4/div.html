@@ -1,11 +1,19 @@
-{%extends "base.html"%}
+{% extends "base.html" %}
 
-{% block lab2 %} Деление чисел{% endblock %}
+{% block lab2 %} Арифметические операции {% endblock %}
 
-{%block main%}
-        {%if error%}
-            {{error}}
-        <h1>Деление чисел</h1>
-        {{x1}}/{{x2}} = {{result}}
-        {%endif%}
-{%endblock%}
+{% block main %}
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %} 
+    {% if x1 is not none and x2 is not none %}
+        <h1>Результаты операций с {{ x1 }} и {{ x2 }}</h1>
+        <div style="text-align: center;">
+            Деление: {{ x1 }} / {{ x2 }} = {{ result1 }}<br>
+            Суммирование: {{ x1 }} + {{ x2 }} = {{ result2 }}<br>
+            Умножение: {{ x1 }} × {{ x2 }} = {{ result3 }}<br>
+            Вычитание: {{ x1 }} - {{ x2 }} = {{ result4 }}<br>
+            Возведение в степень: {{ x1 }} ^ {{ x2 }} = {{ result5 }}<br>
+        </div>
+    {% endif %}
+{% endblock %}
