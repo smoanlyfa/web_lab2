@@ -12,6 +12,7 @@ def div_form():
 
 @lab4.route('/lab4/div', methods=['POST'])
 def div():
+    
     x1 = request.form.get('x1')
     x2 = request.form.get('x2')
 
@@ -39,3 +40,22 @@ def div():
                            result3=result3, 
                            result4=result4, 
                            result5=result5)
+
+
+tree_count = 0
+@lab4.route('/lab4/tree', methods=['GET', 'POST'])
+def tree():
+    
+    global tree_count
+    if request.method == 'GET':
+        return render_template('lab4/tree.html', tree_count=tree_count)
+    
+    operation = request.form.get('operation')
+
+    if operation == 'cut':
+        if tree_count > 0:
+            tree_count -= 1
+    elif operation == 'plant':
+        tree_count += 1
+
+    return render_template('lab4/tree.html', tree_count=tree_count)
