@@ -43,6 +43,7 @@ def div():
 
 
 tree_count = 0
+max_count = 10
 @lab4.route('/lab4/tree', methods=['GET', 'POST'])
 def tree():
     
@@ -56,7 +57,8 @@ def tree():
         if tree_count > 0:
             tree_count -= 1
     elif operation == 'plant':
-        tree_count += 1
+        if tree_count < max_count:
+            tree_count += 1
 
     return redirect('/lab4/tree')
 
