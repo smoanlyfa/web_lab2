@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, make_response, redirect, session
+from flask import Blueprint, render_template, request, make_response, redirect, session, url_for
 lab4 = Blueprint('lab4',__name__)
 
 @lab4.route('/lab4/')
@@ -132,4 +132,54 @@ def fridge():
             message = 'Ошибка: не задана температура'
 
     return render_template('lab4/fridge.html', message=message, temperature=temperature)
+
+
+prices = {
+    'ячмень': 12345,
+    'овёс': 8522,
+    'пшеница': 8722,
+    'рожь': 14111
+}
+
+@lab4.route('/lab4/seed', methods=['GET', 'POST'])
+def seed():
+    if request.method == 'POST':
+        grain_type = request.form.get('grain_type')
+        weight = request.form.get('weight')
+
+        if not weight:
+            error = "Ошибка: вес не был указан."
+            return render_template('/lab4/seed.html', error=error)
+
+        try:
+            weight = float(weight)
+        except ValueError:
+            error = "Ошибка: вес должен быть числом."
+            return render_template('/lab4/seed.html', error=error)
+
+        if weight <= 0:
+            error = "Ошибка: вес должен быть больше нуля."
+            return render_template('/lab4/seed.html', error=error)
+
+        if weight > 500:
+            error = "Ошибка: такого объёма сейчас нет в наличии."
+            return render_template('/lab4/seed.html', error=error)
+
+        price_per_ton = prices.get(grain_type)
+        total_cost = weight * price_per_ton
+
+        discount = 0
+        if weight > 50:
+            discount = total_cost * 0.10
+            total_cost -= discount
+            discount_message = f"Скидка: {discount:.2f} руб."
+        else:
+            discount_message = ""
+
+        return render_template('/lab4/seed.html', success=True, grain=grain_type, weight=weight, total_cost=total_cost, discount_message=discount_message)
+
+    
+    return render_template('/lab4/seed.html')
+
+
 
