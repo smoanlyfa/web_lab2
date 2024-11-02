@@ -182,4 +182,54 @@ def seed():
     return render_template('/lab4/seed.html')
 
 
+@lab4.route('/lab4/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        login = request.form.get('login')
+        password = request.form.get('password')
+        name = request.form.get('name')
 
+        if not login or not password or not name:
+            error = 'Пожалуйста, заполните все поля'
+            return render_template('lab4/register.html', error=error)
+
+        if any(user['login'] == login for user in users):
+            error = 'Пользователь с таким логином уже существует'
+            return render_template('lab4/register.html', error=error)
+
+        users.append({'login': login, 'password': password, 'name': name, 'gender': 'неизвестно'})
+        return redirect('/lab4/login')  
+
+    return render_template('lab4/register.html')
+
+@lab4.route('/lab4/users')
+def users_route():
+    if 'login' not in session:
+        return redirect('/lab4/login') 
+    
+    login = session['login']
+    name = next((user['name'] for user in users if user['login'] == login), login)
+    
+    return render_template('lab4/users.html', users=users, name=name)
+
+
+@lab4.route('/lab4/edit', methods=['GET', 'POST'])
+def edit():
+    if 'login' not in session:
+        return redirect('/lab4/login')
+
+    login = session['login']
+    user = next((user for user in users if user['login'] == login), None)
+
+    if request.method == 'POST':
+        new_name = request.form.get('name')
+        new_password = request.form.get('password')
+
+        if new_name:
+            user['name'] = new_name 
+        if new_password:
+            user['password'] = new_password
+
+        return redirect('/lab4/users')
+
+    return render_template('lab4/edit.html', user=user)
