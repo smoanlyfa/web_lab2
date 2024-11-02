@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template
+from flask import Flask, redirect, render_template, session
 app = Flask(__name__)
 from lab1 import lab1
 from lab2 import lab2
@@ -10,6 +10,8 @@ app.register_blueprint(lab1)
 app.register_blueprint(lab2)
 app.register_blueprint(lab3)
 app.register_blueprint(lab4)
+
+app.secret_key = 'ключ'
 
 @app.route("/")
 @app.route("/index")
