@@ -4,9 +4,11 @@
 
 {%block main%}
     <h1>Flask и БД</h1>
-    
+    <p>Привет, {% if session.get('login') %}{{ session['login'] }}{% else %}Anonymous{% endif %}!</p>
     <div>Список сделанных страниц:</div>
+
     <ol>
+        <li><a href="/lab5/login">Войти</a></li>
         <li><a href="/lab5/register">Регистрация</a></li>
     </ol>
 {%endblock%}
