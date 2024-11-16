@@ -106,5 +106,21 @@ def create():
     db_close(conn, cur)
     return redirect('/lab5')
 
+@lab5.route('/lab5/list', methods=['GET', 'POST'])
+def list():
+    login = session.get('login')
+    if not login:
+        return redirect('/lab5/login')
+    
+    conn, cur = db_connect()
 
+    cur.execute("SELECT * FROM users WHERE login = %s;", (login, ))
+    users = cur.fetchone()
+    user_id = users["id"]
+
+    cur.execute("SELECT * FROM articles WHERE user_id = %s;", (user_id, ))
+    articles = cur.fetchall()
+
+    db_close(conn, cur)
+    return render_template('/lab5/articles.html', articles=articles)
 
