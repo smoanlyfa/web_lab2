@@ -1,4 +1,5 @@
-from flask import Flask, redirect, render_template, session, os
+from flask import Flask, redirect, render_template, session
+import os
 app = Flask(__name__)
 
 from lab1 import lab1
