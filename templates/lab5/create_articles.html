@@ -3,6 +3,27 @@
 {% block lab2 %} Лабораторная работа 5 {% endblock %}
 
 {% block main %}
+<style>
+    body {
+        text-align: center;
+    }
+
+    .button {
+        padding: 10px 20px;
+        margin: 10px 0;
+        background-color: #4CAF50; /* Зелёный цвет */
+        color: white; /* Цвет текста */
+        text-decoration: none; /* Убираем подчеркивание */
+        border-radius: 5px; /* Скруглённые углы */
+        transition: background-color 0.3s ease; /* Плавный переход цвета */
+        width: 200px; /* Фиксированная ширина кнопки */
+        text-align: center; /* Центрированный текст */
+    }
+
+    .button:hover {
+        background-color: #45a049; /* Темнее при наведении */
+    }
+</style>
     <h1>Создание статьи</h1>
     <form method="post">
         <div>
