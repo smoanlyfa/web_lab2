@@ -19,7 +19,9 @@
         font-family: 'Courier New', Courier, monospace;
         font-weight: bold;
     }
-
+    .error-message {
+        color: red;
+    }
 </style>
 {% endblock %}
 
@@ -64,8 +66,9 @@
     <label>
         Описание:
         <textarea id="description"></textarea>
+        <div id = "description-error" class = "error-message"></div>
     </label><br>
     <button onclick="sendFilm()">OK</button>
     <button onclick="cancel()">Отмена</button>
-</div>     
-{%endblock%}
+    </div>     
+    {%endblock%}

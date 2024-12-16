@@ -107,10 +107,14 @@ function sendFilm() {
             fillFilmList();
             hideModal();
             return {};
-        }
-        return rest.json();
+            }
+            return rest.json(); 
     })
-
+    .then(function(errors) {
+        if (errors.description) {
+            document.getElementById('description-error').innerText = errors.description;
+        }
+    });
 }
 
 function editFilm(id) {
