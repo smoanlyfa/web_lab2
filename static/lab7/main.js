@@ -128,6 +128,7 @@ function editFilm(id) {
         document.getElementById('title-ru').value = film.title_ru;
         document.getElementById('year').value = film.year;
         document.getElementById('description').value = film.description;
+        document.getElementById('description-error').innerText = '';
         showModal();
     });
 }
