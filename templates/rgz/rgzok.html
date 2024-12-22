@@ -1,0 +1,14 @@
+{%extends "base.html"%}
+
+{% block lab2 %} РГЗ{% endblock %}
+
+{%block main%}
+    <h1>Магазин мебели</h1>
+    <p>Привет, {% if session.get('user_name') %}{{ session['user_name'] }}{% else %}Anonymous{% endif %}!</p>
+
+    <ul>
+        {% if session.get('login') %}
+        <li><a href="/rgz/logout">Выйти</a></li>
+        {% endif %}
+    </ul>
+{%endblock%}
