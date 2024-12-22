@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, make_response, redirect, session, url_for
 
+
 lab7 = Blueprint('lab7', __name__)
 
 @lab7.route('/lab7/')
@@ -64,19 +65,44 @@ def del_film(id):
 @lab7.route('/lab7/rest-api/films/<int:id>', methods=['PUT']) 
 def put_film(id):
     film = request.get_json()
-    if 0 <= id < len(films):
-         if not film.get('title') and film['title_ru']:
-            film['title'] = film['title_ru']
-            films[id] = film 
-            return films[id]
+    # Проверка, существует ли фильм с указанным id
+    if id < 0 or id >= len(films):
+        return {'error': 'Фильм с указанным id не найден'}, 404
 
+    # Проверки для обновления фильма
+    if not film.get('title_ru'):
+        return {'title_ru': 'Русское название обязательно'}, 400
 
-@lab7.route('/lab7/rest-api/films/', methods=['POST']) 
+    if not film.get('description'):
+        return {'description': 'Описание обязательно'}, 400
+
+    if film.get('year', 0) < 1895 or film.get('year', 0) > 2023:
+        return {'year': 'Год должен быть между 1895 и 2023'}, 400
+
+    if not film.get('title') and film.get('title_ru'):
+        film['title'] = film['title_ru']
+
+    # Обновление фильма
+    films[id] = film
+    return film, 200
+
+@lab7.route('/lab7/rest-api/films/', methods=['POST'])
 def add_film():
     film = request.get_json()
-    if film['description'] == '':
-        return {'description': 'Заполните описание'}, 400
-    if not film.get('title') and film['title_ru']:
+
+    # Проверки для добавления фильма
+    if not film.get('title_ru'):
+        return {'title_ru': 'Русское название обязательно'}, 400
+
+    if not film.get('description') or len(film['description']) > 2000:
+        return {'description': 'Описание обязательно и не может превышать 2000 символов'}, 400
+
+    if film.get('year', 0) < 1895 or film.get('year', 0) > 2023:
+        return {'year': 'Год должен быть между 1895 и 2023'}, 400
+
+    if not film.get('title') and film.get('title_ru'):
         film['title'] = film['title_ru']
+
+    # Добавление фильма в список
     films.append(film)
-    return '', 201
+    return film, 201
