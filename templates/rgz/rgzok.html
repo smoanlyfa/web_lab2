@@ -1,14 +1,45 @@
-{%extends "base.html"%}
+{% extends "base.html" %}
 
-{% block lab2 %} РГЗ{% endblock %}
+{% block lab2 %} Магазин мебели {% endblock %}
 
-{%block main%}
-    <h1>Магазин мебели</h1>
-    <p>Привет, {% if session.get('user_name') %}{{ session['user_name'] }}{% else %}Anonymous{% endif %}!</p>
+{% block script %}
+<script src="{{ url_for('static', filename='rgzf/main.js') }}"></script>
+{% endblock %}
 
-    <ul>
-        {% if session.get('login') %}
-        <li><a href="/rgz/logout">Выйти</a></li>
-        {% endif %}
-    </ul>
-{%endblock%}
+{% block main %}
+<link rel="stylesheet" href="{{ url_for('static', filename='stylergz.css') }}">
+<h1>Магазин мебели</h1>
+
+<!-- Кнопки для действий пользователя -->
+<div class="user-actions">
+    {% if session.get('login') %}
+        <p>Добро пожаловать, {{ session.get('user_name') }}!</p>
+        <a class="button" href="/rgz/cart">Корзина</a>
+        <a class="button" href="/rgz/logout">Выйти</a>
+    {% else %}
+        <a class="button" href="/rgz/register">Регистрация</a>
+        <a class="button" href="/rgz/login">Войти</a>
+    {% endif %}
+</div>
+
+<!-- Список товаров -->
+<h2 class="product-list-title">Список товаров</h2>
+
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-item">
+        <div class="product-image">
+            <img src="{{ product.img_url }}" alt="{{ product.name }}">
+        </div>
+        <h2 class="product-name">{{ product.name }}</h2>
+        <p class="product-price">{{ product.price }} руб.</p>
+        <p class="product-description">{{ product.description }}</p>
+        <button class="add-to-cart" data-product-id="{{ product.id }}">Добавить в корзину</button>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    window.onload = fillProductList;
+</script>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block lab2 %} Корзина {% endblock %}
+{% block script %}
+<script src="{{ url_for('static', filename='rgzf/main.js') }}"></script>
+{% endblock %}
+
+
+{% block main %}
+<link rel="stylesheet" href="{{ url_for('static', filename='stylergz.css') }}">
+<h1>Корзина</h1>
+<div class="cart-items">
+    {% for product in cart_products %}
+    <div class="cart-item" data-product-id="{{ product.id }}">
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.price }} руб.</p>
+        <button class="remove-from-cart" data-product-id="{{ product.id }}">Удалить из корзины</button>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="total-price">
+    <p>Общая стоимость: <strong>{{ total_price }} руб.</strong></p>
+</div>
+
+<a href="/rgz/checkout" class="button">Оформить покупку</a>
+<a href="/rgz/" class="button">К товарам</a>
+{% endblock %}

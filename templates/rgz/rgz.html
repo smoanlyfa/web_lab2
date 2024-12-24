@@ -1,11 +1,38 @@
-{%extends "base.html"%}
+{% extends "base.html" %}
 
-{% block lab2 %} РГЗ{% endblock %}
+{% block lab2 %} РГЗ {% endblock %}
 
-{%block main%}
-    <h1>Магазин мебели</h1>
-    <ul>
-        <li><a href="/rgz/register">Регистрация</a></li>
-        <li><a href="/rgz/login">Войти</a></li>
-    </ul>
-{%endblock%}
+
+{% block script %}
+<script src="{{ url_for('static', filename='rgzf/main.js') }}"></script>
+{% endblock %}
+
+{% block main %}
+        <h1>Магазин мебели</h1>
+        <div class="user-actions">
+            <a class="button" href="/rgz/register">Регистрация</a>
+            <a class="button" href="/rgz/login">Войти</a>
+        </div>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylergz.css') }}">
+    <h2 class="greeting">Добро пожаловать!</h2> <!-- Приветствие пользователя -->
+    
+    <h2 class="product-list-title">Список товаров</h2> <!-- Заголовок списка товаров -->
+    
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="product-item">
+            <div class="product-image">
+                <img src="{{ product.img_url }}" alt="{{ product.name }}">
+            </div>
+            <h2 class="product-name">{{ product.name }}</h2>
+            <p class="product-price">{{ product.price }} руб.</p>
+            <p class="product-description">{{ product.description }}</p>
+            <button class="add-to-cart" data-product-id="{{ product.id }}">Добавить в корзину</button>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        window.onload = fillProductList;
+    </script>
+{% endblock %}
