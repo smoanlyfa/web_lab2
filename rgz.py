@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session, redirect, current_app, jsonify, url_for
+from flask import Blueprint, render_template, request, session, redirect, current_app, jsonify
 from functools import wraps
 from datetime import datetime
 import psycopg2
@@ -131,8 +131,7 @@ products = [
     },
     {
         'id': 18,
-        'name': 'Кухонный уголок',
-        'description': 'Комплект для небольшой кухни',
+        'name': 'Кухонный уголок','description': 'Комплект для небольшой кухни',
         'price': 80000,
         'img_url': '/static/rgz/кухонный уголок.jpg'
     },
@@ -238,7 +237,7 @@ products = [
 
 @rgz.route('/rgz/')
 def lab_5():
-    return render_template('rgz/rgz.html', login = session.get('login'),  user_name=session.get('user_name'), products=[p for p in products])
+    return render_template('rgz/rgz.html', login=session.get('login'), user_name=session.get('user_name'), products=products)
 
 def db_connect():
     if current_app.config['DB_TYPE'] == 'postgres':
@@ -252,6 +251,7 @@ def db_connect():
     else:
         dir_path = path.dirname(path.realpath(__file__))
         db_path = path.join(dir_path, "database.db")
+        conn = sqlite3.connect(db_path)
         conn.row_factory = sqlite3.Row
         cur = conn.cursor()
 
@@ -271,14 +271,11 @@ def register():
     password = request.form.get('password')
     user_name = request.form.get('name')
     phone = request.form.get('phone')
-
-    # Проверка, что все поля заполнены
     if not (login and password and user_name and phone):
         return render_template('rgz/register.html', error="Пожалуйста, заполните все поля")
 
     conn, cur = db_connect()
 
-    # Проверка, существует ли пользователь с таким логином
     if current_app.config['DB_TYPE'] == 'postgres':
         cur.execute("SELECT login FROM users WHERE login=%s;", (login,))
     else:
@@ -288,10 +285,8 @@ def register():
         db_close(conn, cur)
         return render_template('rgz/register.html', error="Такой пользователь уже существует")
 
-    # Хэширование пароля
     password_hash = generate_password_hash(password)
 
-    # Добавление пользователя в базу данных
     if current_app.config['DB_TYPE'] == 'postgres':
         cur.execute("INSERT INTO users (login, password, user_name, phone) VALUES (%s, %s, %s, %s);",
                     (login, password_hash, user_name, phone))
@@ -315,13 +310,13 @@ def logout():
 def login_5():
     if request.method == 'GET':
         return render_template('rgz/login.html')
-    
+
     login = request.form.get('login')
     password = request.form.get('password')
 
-    if not (login and password): 
+    if not (login and password):
         return render_template('rgz/login.html', error="Пожалуйста, заполните все поля")
-    
+
     conn, cur = db_connect()
 
     if current_app.config['DB_TYPE'] == 'postgres':
@@ -332,24 +327,22 @@ def login_5():
 
     if not user:
         db_close(conn, cur)
-        return render_template('rgz/login.html', error = 'Логин или пароль неверны')
-    
+        return render_template('rgz/login.html', error='Логин или пароль неверны')
+
     if not check_password_hash(user['password'], password):
         db_close(conn, cur)
-        return render_template('rgz/login.html', error = 'Логин или пароль неверны')
+        return render_template('rgz/login.html', error='Логин или пароль неверны')
 
     session['login'] = login
-    session['user_name'] = user['user_name']  
+    session['user_name'] = user['user_name']
 
     db_close(conn, cur)
     return render_template('rgz/rgzok.html', login=login)
-
 
 @rgz.route('/lab7/rest-api/products/', methods=['GET'])
 def get_products():
     return jsonify(products)
 
-# Маршрут для получения товара по id
 @rgz.route('/lab7/rest-api/products/<int:id>', methods=['GET'])
 def get_product(id):
     product = next((p for p in products if p['id'] == id), None)
@@ -357,7 +350,6 @@ def get_product(id):
         return jsonify(product)
     else:
         return jsonify({'error': 'Товар не найден'}), 404
-    
 
 def login_required(f):
     @wraps(f)
@@ -382,20 +374,7 @@ def add_to_cart():
         session['cart'][product_id] = 1
 
     session.modified = True
-    print("Current cart:", session['cart'])
-
-    return jsonify({'message': 'Товар добавлен в корзину', 'cart': session['cart']})
-
-@rgz.route('/rgz/cart', methods=['GET'])
-def view_cart():
-    if 'cart' not in session:
-        session['cart'] = {}
-
-    cart_products = [p for p in products if str(p['id']) in session['cart']]
-
-    total_price = sum(p['price'] for p in cart_products)
-    return render_template('rgz/cart.html', cart_products=cart_products, total_price=total_price)
-
+    return jsonify({'message': 'Product added to cart', 'cart': session['cart']})
 
 @rgz.route('/rgz/remove_from_cart', methods=['POST'])
 def remove_from_cart():
@@ -406,17 +385,25 @@ def remove_from_cart():
     if 'cart' in session and product_id in session['cart']:
         del session['cart'][product_id]
         session.modified = True
-        return jsonify({'message': 'Товар удален', 'cart': session['cart']})
+        return jsonify({'message': 'Product removed from cart', 'cart': session['cart']})
     else:
         return jsonify({'error': 'Product not found in cart'}), 404
-    
+
+@rgz.route('/rgz/cart', methods=['GET'])
+def view_cart():
+    if 'cart' not in session:
+        session['cart'] = {}
+
+
+    cart_products = [p for p in products if str(p['id']) in session['cart']]
+    total_price = sum(p['price'] * session['cart'][str(p['id'])] for p in cart_products)
+    return render_template('rgz/cart.html', cart_products=cart_products, total_price=total_price)
 
 @rgz.route('/rgz/checkout', methods=['GET', 'POST'])
 def checkout():
     if request.method == 'GET':
         return render_template('rgz/checkout.html')
 
-    # Обработка оформления покупки
     if 'cart' in session:
         session.pop('cart')
         return render_template('rgz/checkout_success.html')

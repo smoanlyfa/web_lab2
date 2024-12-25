@@ -13,7 +13,7 @@
 <!-- Кнопки для действий пользователя -->
 <div class="user-actions">
     {% if session.get('login') %}
-        <p>Добро пожаловать, {{ session.get('user_name') }}!</p>
+        <p style="text-align: center; font-family: 'Courier New', Courier, monospace; font-weight: bold;">Добро пожаловать, {{ session.get('user_name') }}!</p>
         <a class="button" href="/rgz/cart">Корзина</a>
         <a class="button" href="/rgz/logout">Выйти</a>
     {% else %}
@@ -40,6 +40,6 @@
 </div>
 
 <script>
-    window.onload = fillProductList;
+    window.onload = fillProductListOK;
 </script>
 {% endblock %}

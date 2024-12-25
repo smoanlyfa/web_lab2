@@ -29,6 +29,50 @@ function fillProductList() {
             productDescription.className = 'product-description';
             productDescription.innerText = product.description;
 
+            // Убрали создание и добавление кнопки "Добавить в корзину"
+
+            productItem.appendChild(productImage);
+            productItem.appendChild(productName);
+            productItem.appendChild(productPrice);
+            productItem.appendChild(productDescription);
+
+            productGrid.appendChild(productItem);
+        });
+    })
+    .catch(error => console.error('Error fetching products:', error));
+}
+
+function fillProductListOK() {
+    fetch('/lab7/rest-api/products/')
+    .then(response => response.json())
+    .then(products => {
+        let productGrid = document.querySelector('.product-grid');
+        productGrid.innerHTML = '';
+
+        products.forEach(product => {
+            let productItem = document.createElement('div');
+            productItem.className = 'product-item';
+
+            let productImage = document.createElement('div');
+            productImage.className = 'product-image';
+
+            let img = document.createElement('img');
+            img.src = product.img_url;
+            img.alt = product.name;
+            productImage.appendChild(img);
+
+            let productName = document.createElement('h2');
+            productName.className = 'product-name';
+            productName.innerText = product.name;
+
+            let productPrice = document.createElement('p');
+            productPrice.className = 'product-price';
+            productPrice.innerText = `${product.price} руб.`;
+
+            let productDescription = document.createElement('p');
+            productDescription.className = 'product-description';
+            productDescription.innerText = product.description;
+
             let addToCartButton = document.createElement('button');
             addToCartButton.className = 'add-to-cart';
             addToCartButton.innerText = 'Добавить в корзину';

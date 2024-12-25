@@ -3,6 +3,88 @@
 {% block lab2 %} РГЗ {% endblock %}
 
 {% block main %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Занимает всю высоту экрана */
+        flex-direction: column; /* Элементы выстраиваются вертикально */
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px; /* Отступ снизу для заголовка */
+    }
+
+    header {
+        background-color: #5491bd;
+        color: #031341;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    footer {
+        background-color: #5491bd;
+        color: #031341;
+        width: 100%;
+        text-align: right;
+        padding: 10px 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+
+    form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 320px;
+        margin-top: 60px; /* Отступ сверху, чтобы форма не накладывалась на header */
+        margin-bottom: 60px; /* Отступ снизу, чтобы форма не накладывалась на footer */
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #329fe2;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #3496e5;
+    }
+</style>
     <h1>Регистрация</h1>
     <form action="/rgz/register" method="post"> 
         <label for="login">Логин:</label>

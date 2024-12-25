@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
-{% block lab2 %} РГЗ {% endblock %}
+{% block lab2 %} Корзина {% endblock %}
+{% block script %}
+<script src="{{ url_for('static', filename='rgzf/main.js') }}"></script>
+{% endblock %}
+
 
 {% block main %}
 <style>
@@ -85,22 +89,21 @@
         background-color: #3496e5;
     }
 </style>
-    <h1>Вход</h1>
-    <form action="/rgz/login" method="post"> 
-        <div>
-            <label>
-                Логин: <input type="text" name="login">
-            </label>
-        </div>
+<link rel="stylesheet" href="{{ url_for('static', filename='stylergz.css') }}">
+<h1>Оплата</h1>
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+<form method="POST">
+    <label for="card_number">Номер карты:</label>
+    <input type="text" id="card_number" name="card_number" required><br><br>
 
-        <div>
-            <label>
-                Пароль: <input type="password" name="password">
-            </label>
-        </div>
+    <label for="expiry_date">Срок действия:</label>
+    <input type="text" id="expiry_date" name="expiry_date" required><br><br>
 
-        <div style="color: red;">{{ error }}</div>
+    <label for="cvv">CVV:</label>
+    <input type="text" id="cvv" name="cvv" required><br><br>
 
-        <button type="submit">Вход</button>
-    </form>
+    <button type="submit">Подтвердить оплату</button>
+</form>
 {% endblock %}

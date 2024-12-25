@@ -5,24 +5,168 @@
 <script src="{{ url_for('static', filename='rgzf/main.js') }}"></script>
 {% endblock %}
 
-
 {% block main %}
-<link rel="stylesheet" href="{{ url_for('static', filename='stylergz.css') }}">
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #5491bd;
+    color: #031341;
+ 
+}
+h1 {
+    text-align: center;
+    color: #444;
+    margin-top: 20px;
+}
+
+main {
+    flex: 1; /* Основное содержимое занимает все доступное пространство */
+    padding: 20px; /* Отступы для контента */
+}
+
+footer {
+    background-color: #5491bd;
+    color: #031341;
+    width: 100%;
+    text-align: right;
+    padding: 10px 0;
+}
+
+
+.cart-count {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1.2em;
+}
+
+.cart-items {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item h2 {
+    margin: 0;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.cart-item p {
+    margin: 0;
+    font-size: 1em;
+    color: #777;
+}
+
+.remove-from-cart {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.remove-from-cart:hover {
+    background-color: #ff1a1a;
+}
+
+.empty-cart-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #888;
+    padding: 20px;
+}
+
+.total-price {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1.3em;
+    color: #444;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #4798d5;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+a.button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+</style>
 <h1>Корзина</h1>
+
+<!-- Счетчик товаров в корзине -->
+<div class="cart-count">
+    <p style="text-align: center; font-family: 'Courier New', Courier, monospace; font-weight: bold;">Товаров в корзине: <strong id="cart-count">{{ cart_products|length }}</strong></p>
+</div>
+
 <div class="cart-items">
-    {% for product in cart_products %}
-    <div class="cart-item" data-product-id="{{ product.id }}">
-        <h2>{{ product.name }}</h2>
-        <p>{{ product.price }} руб.</p>
-        <button class="remove-from-cart" data-product-id="{{ product.id }}">Удалить из корзины</button>
-    </div>
-    {% endfor %}
+    {% if cart_products %}
+        {% for product in cart_products %}
+        <div class="cart-item" data-product-id="{{ product.id }}">
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.price }} руб.</p>
+            <button class="remove-from-cart" data-product-id="{{ product.id }}">Удалить из корзины</button>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="empty-cart-message">Ваша корзина пуста.</p>
+    {% endif %}
 </div>
 
 <div class="total-price">
-    <p>Общая стоимость: <strong>{{ total_price }} руб.</strong></p>
+    <p style="text-align: center; font-family: 'Courier New', Courier, monospace; font-weight: bold;">Общая стоимость: <strong>{{ total_price }} руб.</strong></p>
 </div>
 
-<a href="/rgz/checkout" class="button">Оформить покупку</a>
-<a href="/rgz/" class="button">К товарам</a>
+<a href="/rgz/checkout">
+    <button>Перейти к оплате</button>
+</a>
+<a href="/rgz/">
+    <button>К товарам</button>
+</a>
+
 {% endblock %}
