@@ -374,7 +374,7 @@ def add_to_cart():
         session['cart'][product_id] = 1
 
     session.modified = True
-    return jsonify({'message': 'Product added to cart', 'cart': session['cart']})
+    return jsonify({'message': 'Товар добавлен в корзину', 'cart': session['cart']})
 
 @rgz.route('/rgz/remove_from_cart', methods=['POST'])
 def remove_from_cart():
@@ -385,7 +385,7 @@ def remove_from_cart():
     if 'cart' in session and product_id in session['cart']:
         del session['cart'][product_id]
         session.modified = True
-        return jsonify({'message': 'Product removed from cart', 'cart': session['cart']})
+        return jsonify({'message': 'Товар удален', 'cart': session['cart']})
     else:
         return jsonify({'error': 'Product not found in cart'}), 404
 
