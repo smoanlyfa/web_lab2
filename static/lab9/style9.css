@@ -1,0 +1,108 @@
+body {
+    background-color: rgb(54, 162, 224);
+    width: 100%;
+    height: 100%;
+    color: #fff; /* Белый текст */
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Веселый шрифт */
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+header {
+    background-color: red;
+}
+
+footer {
+    background-color: red;
+}
+
+h1 {
+    color: #fad390; /* Желтый цвет для заголовка */
+    font-size: 3em;
+    text-shadow: 2px 2px 4px #000; /* Тень текста */
+}
+
+/* Стили для кнопки "Далее" */
+form input[type="submit"] {
+    background-color: #ff6b6b; /* Ярко-красный цвет */
+    color: #fff;
+    font-size: 1.5em;
+    padding: 15px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Тень */
+}
+
+form input[type="submit"]:hover {
+    background-color: #ff4757; /* Темнее при наведении */
+    transform: scale(1.05); /* Увеличение при наведении */
+}
+
+form input[type="text"] {
+    height: 40px;
+    width: 30%;
+}
+
+form {
+    font-size: 20pt;
+    color: #fad390;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px #000; 
+}
+
+p {
+    font-size: 1.5em;
+    margin: 20px 0;
+}
+
+a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    background-color: #e55039; /* Красный цвет кнопки */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #eb2f06; /* Темно-красный при наведении */
+}
+
+/* Стили для изображений */
+img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+    border: 5px solid #fad390; /* Желтая рамка */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Свечение */
+}
+
+/* Новогодние украшения */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/static/lab9/showflakes.jpg') repeat; /* Снежинки */
+    pointer-events: none;
+    z-index: -1;
+    animation: snow 10s linear infinite;
+}
+
+@keyframes snow {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 100%;
+    }
+}

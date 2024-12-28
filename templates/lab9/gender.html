@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block lab2 %} Лабораторная работа 9 {% endblock %}
+
+{% block main %}
+
+<link rel="stylesheet" href="/static/lab9/style9.css">
+<h1>Выберите ваш пол</h1>
+<form method="POST" action="/lab9/gender">
+    <input type="radio" name="gender" value="male" required> Мужчина
+    <input type="radio" name="gender" value="female"> Женщина
+    <input type="submit" value="Далее">
+</form>
+{% endblock %}

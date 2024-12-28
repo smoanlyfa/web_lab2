@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block lab2 %} Лабораторная работа 9 {% endblock %}
+
+{% block main %}
+<style>
+    p {
+        font-size: 50pt; /* Увеличенный размер текста */
+        margin: 20px 0;
+        line-height: 1.5;
+        text-align: center;
+        color: #fad390;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px #000; 
+    }
+
+    footer {
+        margin-top:0%; /* Футер прижимается к низу */
+        position: fixed;
+    }
+    main {
+        flex: 1; /* Основной контент занимает все доступное пространство */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px; /* Отступы внутри основного контента */
+    }
+
+    img {
+        display: block; /* Делаем изображение блочным элементом */
+        margin-left: auto; /* Автоматический отступ слева */
+        margin-right: auto; /* Автоматический отступ справа */
+        max-width: 100%;
+        height: auto;
+        margin-top: 20px;
+        border: 5px solid #fad390; /* Желтая рамка */
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Свечение */
+}
+</style>
+<link rel="stylesheet" href="/static/lab9/style9.css">
+<h1>Поздравляю тебя, {{ session['username'] }}!</h1>
+<p>
+    {% if session['gender'] == 'male' %}
+        Желаю, чтобы ты быстро вырос, был умным и здоровым.
+    {% else %}
+        Желаю, чтобы ты быстро выросла, была умной и здоровой.
+    {% endif %}
+    Вот тебе подарок — 
+    {% if session['preference1'] == 'tasty' %}
+        {% if session['preference2'] == 'sweet' %}
+            мешочек конфет.
+            <div>
+                <img src="/static/lab9/candy.jpg" alt="Конфеты">
+            </div>
+        {% else %}
+            сытный обед.
+            <div>
+                <img src="/static/lab9/pizza.jpg" alt="Сытное">
+            </div>
+        {% endif %}
+    {% else %}
+        {% if session['preference2'] == 'art' %}
+            картина.
+            <div>
+                <img src="/static/lab9/paiting.jpg" alt="Искусство">
+            </div>
+        {% else %}
+            цветы.
+            <div>
+                <img src="/static/lab9/flowers.jpg" alt="Природа">
+            </div>
+        {% endif %}
+    {% endif %}
+</p>
+<a href="/lab9/reset">Сбросить и начать заново</a>
+{% endblock %}

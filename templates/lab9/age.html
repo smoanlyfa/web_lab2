@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block lab2 %} Лабораторная работа 9 {% endblock %}
+
+{% block main %}
+<link rel="stylesheet" href="/static/lab9/style9.css">
+<h1>Введите ваш возраст</h1>
+<form method="POST" action="/lab9/age">
+    <input type="text" name="age" required>
+    <input type="submit" value="Далее">
+</form>
+{% endblock %}
